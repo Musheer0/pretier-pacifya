@@ -49,7 +49,13 @@ if(!attendence)
  if(attendence)
 return (
 <div className='w-full h-full flex flex-wrap gap-5  justify-center '>
-  <CardTitle>Overall Percentage: {attendence.overall_percentage}%</CardTitle>
+  <CardTitle className='w-full text-center'>Overall Percentage: {attendence.overall_percentage}%</CardTitle>
+  <Button className='w-full'
+  variant={'outline'}
+  onClick={()=>{
+    setAttendence(null);
+    formMethods.reset()
+  }}>Try another one</Button>
     {attendence.attendance_statement.map((subject)=>{
         const isShortage = subject.shortage!=='N'
   return  <Card key={subject.subject_id} className={cn(
