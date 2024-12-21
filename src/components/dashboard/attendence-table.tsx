@@ -9,6 +9,7 @@ import { useForm } from 'react-hook-form'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form'
 import { Input } from '../ui/input'
 import { Button } from '../ui/button'
+import { Textarea } from '../ui/textarea'
 const formSchema = z.object({
     data: z.string().min(1, "Name is required"),
   });
@@ -25,22 +26,22 @@ const AttendenceTable = () => {
 
 if(!attendence)
     return <>
- <Form {...formMethods}>
-        <form  onSubmit={formMethods.handleSubmit(onSubmit)}>
+ <Form  {...formMethods}>
+        <form className='space-y-2 h-full flex flex-col p-2 border mx-auto rounded-md'  onSubmit={formMethods.handleSubmit(onSubmit)}>
         <FormField
           name="data"
           render={({ field }) => (
-            <FormItem>
-              <FormLabel>Name</FormLabel>
+            <FormItem className='flex-1 '>
+              <FormLabel>Attendence Data</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Textarea  className='h-[500px]' {...field} />
               </FormControl>
               <FormMessage>{formMethods.formState.errors.data?.message}</FormMessage>
             </FormItem>
           )}
         />
 
-        <Button type="submit">Submit</Button>
+        <Button type="submit">Format Data</Button>
         </form>
       </Form>
 
@@ -48,6 +49,7 @@ if(!attendence)
  if(attendence)
 return (
 <div className='w-full h-full flex flex-wrap gap-5  justify-center '>
+  <CardTitle>Overall Percentage: {attendence.overall_percentage}%</CardTitle>
     {attendence.attendance_statement.map((subject)=>{
         const isShortage = subject.shortage!=='N'
   return  <Card key={subject.subject_id} className={cn(
